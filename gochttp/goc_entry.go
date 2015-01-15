@@ -97,7 +97,7 @@ func HttpEntry(req *http.Request, resp *http.ResponseWriter) {
 	httpreq.ctx = unsafe.Pointer(data)
 	httpreq.sendfunc = C.send_data_pt(C.SendData)
 	httpreq.finalizefunc = C.finalize_request_pt(C.Finalize)
-	sess := globalSessions.SessionStart(*resp, req)
+	sess,_ := globalSessions.SessionStart(*resp, req)
 	defer sess.SessionRelease(*resp)
 	httpreq.sess.sess = unsafe.Pointer(&sess)
 	httpreq.sess.set_int = C.set_sess_int_pt(C.SetSessInt)
