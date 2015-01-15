@@ -29,12 +29,16 @@ var globalSessions *session.Manager
 
 func init() {
 	TimeoutDur = time.Second * time.Duration(3)
-	globalSessions, _ = session.NewManager("memory", `{"cookieName":"gosessionid", "enableSetCookie,omitempty": true, "gclifetime":3600, "maxLifetime": -1, "secure": false, "sessionIDHashFunc": "sha1", "sessionIDHashKey": "", "cookieLifeTime": 0, "providerConfig": "127.0.0.1:6379"}`)
-	if globalSessions == nil {
-		fmt.Println("sess is nil")
-		return
-	}
-	go globalSessions.GC()
+	//globalSessions, _ = session.NewManager("memory", `{"cookieName":"gosessionid", "enableSetCookie,omitempty": true, "gclifetime":3600, "maxLifetime": -1, "secure": false, "sessionIDHashFunc": "sha1", "sessionIDHashKey": "", "cookieLifeTime": 0, "providerConfig": "127.0.0.1:6379"}`)
+	//if globalSessions == nil {
+	//	fmt.Println("sess is nil")
+	//	return
+	//}
+	//go globalSessions.GC()
+}
+
+func InitSession(s *session.Manager) {
+    globalSessions = s
 }
 
 func Init(argc int, argv []string) {
